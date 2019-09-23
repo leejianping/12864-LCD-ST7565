@@ -22,4 +22,6 @@
 ![The connection as follows:](https://github.com/leejianping/12864-LCD-ST7565/blob/master/webwxgetmsgimg%20(2).jpg)
 
 
-LCD buy from the Taobao, https://item.taobao.com/item.htm?spm=a230r.1.14.33.184f20e9QiTANz&id=527032534518&ns=1&abbucket=18#detail
+LCD buy from the Taobao, https://item.taobao.com/item.htm?spm=a230r.1.14.33.184f20e9QiTANz&id=527032534518&ns=1&abbucket=18#detail 
+
+Search Keyword: 12864 LCD st7565 or  12864 LCD st7565 力先电子
