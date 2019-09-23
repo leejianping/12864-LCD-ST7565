@@ -1,4 +1,4 @@
-# 12864-LCD-ST7565
+# 12864-LCD-ST7565  + Arduino
 
 12864 LCD ST7565 IC Driver  + Arduino MEGA 2560
 
