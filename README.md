@@ -7,5 +7,6 @@
  pin 7 - Data/Command select (RS or A0)  yellow
  pin 6 - LCD reset (RST)                 black
  pin 5 - LCD chip select (CS)            red  */
+ 
 
 ![The connection as follows:](https://github.com/leejianping/12864-LCD-ST7565/blob/master/webwxgetmsgimg%20(2).jpg)
