@@ -1,0 +1,256 @@
+    #include "ST7565.h"
+
+//int ledPin =  13;    // LED connected to digital pin 13
+
+// the LCD backlight is connected up to a pin so you can turn it on & off
+
+
+ /*The pin connection：
+ pin 9 - Serial data out (SID or DB7)    green
+ pin 8 - Serial clock out (SCLK or DB6)  white
+ pin 7 - Data/Command select (RS or A0)  yellow
+ pin 6 - LCD reset (RST)                 black
+ pin 5 - LCD chip select (CS)            red  */
+ST7565 glcd(9, 8, 7, 6, 5);
+
+// a bitmap of a 16x16 fruit icon
+//const static unsigned char __attribute__ ((progmem)) logo16_glcd_bmp[]={
+//0x14,0x24,0x44,0x84,0x64,0x1C,0x20,0x18,0x0F,0xE8,0x08,0x08,0x28,0x18,0x08,0x00,
+//0x20,0x10,0x4C,0x43,0x43,0x2C,0x20,0x10,0x0C,0x03,0x06,0x18,0x30,0x60,0x20,0x00,};
+
+// The setup() method runs once, when the sketch starts
+void setup()   {                
+   Serial.begin(9600);
+
+  Serial.print(freeRam());
+  
+  // turn on backlight
+   glcd.begin(0x0);
+  //retangle
+ //      for(int j=19;j<22;j++){
+//    delay(200);
+   //for(int i=11;i>8;i--){
+    // delay(200);
+//  glcd.setpixel(10, j,BLACK);
+ //   glcd.display();        // show the changes to the buffer
+
+ 
+    
+//   }            
+// 
+//   for(int j=0;j<64;j++){
+//  delay(0);
+//   for(int i=0;i<128;i++){
+//     delay(0);
+//     glcd.setpixel(i, j,BLACK);
+//     glcd.display();        // show the changes to the buffer
+//     
+//      }
+//    
+//    }
+ 
+  // draw many lines
+// testdrawline();
+// glcd.display();       // show the lines
+// delay(2000);
+ // glcd.clear();
+//
+ //draw rectangles;
+//for(int i=0;i<1000;i++){
+// testdrawrect();
+// glcd.display(); 
+//glcd.clear();
+//delay(2000000);
+
+//  testdrawrect();
+// glcd.display(); 
+// glcd.clear();
+//delay(0);
+
+//  testdrawrect();
+// glcd.display(); 
+//semi-screen
+glcd.clear();
+ testdrawrect1();
+ glcd.display(); 
+// glcd.clear();
+
+
+// draw a single pixel
+//  glcd.setpixel(10, 10, BLACK);
+//  glcd.display();        // show the changes to the buffer
+//  glcd.clear();
+//  
+ 
+ 
+//delay(19000);
+//glcd.clear();
+// testdrawrect();
+// glcd.display();
+//  delay(100); 
+// glcd.clear();
+  
+  //}
+// 
+// testdrawrect();
+// glcd.display();
+//   delay(1000);
+// glcd.clear();
+// delay(1000);
+//  
+  // draw rectangles
+//  testdrawrect();
+// glcd.display();
+//  delay(2000);
+ // glcd.clear();
+  // draw multiple rectangles
+ //testfillrect();
+ // glcd.display();
+ // delay(2000);
+ // glcd.clear();
+
+  // draw mulitple circles
+  //testdrawcircle();
+ // glcd.display();
+ // delay(2000);
+ // glcd.clear();
+
+  // draw a black circle, 10 pixel radius, at location (32,32)
+// glcd.fillcircle(32, 32, 10, BLACK);
+// glcd.display();
+// delay(2000);
+// glcd.clear();
+
+  // draw the first ~120 characters in the font
+ // testdrawchar();
+ // glcd.display();
+ // delay(2000);
+ // glcd.clear();
+
+  // draw a string at location (0,0)
+ // glcd.drawstring(0, 0, "li jianping is a  pig");
+ // glcd.display();
+ // delay(2000);
+  //glcd.clear();
+
+  // draw a bitmap icon and 'animate' movement
+ // testdrawbitmap(logo16_glcd_bmp, LOGO16_GLCD_HEIGHT, LOGO16_GLCD_WIDTH);
+}
+
+
+void loop()                     
+{}
+
+// this handy function will return the number of bytes currently free in RAM, great for debugging!   
+int freeRam(void)
+{
+  extern int  __bss_end; 
+  extern int  *__brkval; 
+  int free_memory; 
+  if((int)__brkval == 0) {
+    free_memory = ((int)&free_memory) - ((int)&__bss_end); 
+  }
+  else {
+    free_memory = ((int)&free_memory) - ((int)__brkval); 
+  }
+  return free_memory; 
+} 
+
+
+#define NUMFLAKES 10
+#define XPOS 0
+#define YPOS 1
+#define DELTAY 2
+
+void testdrawbitmap(const uint8_t *bitmap, uint8_t w, uint8_t h) {
+ uint8_t icons[NUMFLAKES][3];
+  srandom(666);     // whatever seed
+ 
+  // initialize
+  for (uint8_t f=0; f< NUMFLAKES; f++) {
+    icons[f][XPOS] = random() % 128;
+    icons[f][YPOS] = 0;
+    icons[f][DELTAY] = random() % 5 + 1;
+  }
+
+  while (1) {
+    // draw each icon
+    for (uint8_t f=0; f< NUMFLAKES; f++) {
+ //     glcd.drawbitmap(icons[f][XPOS], icons[f][YPOS], logo16_glcd_bmp, w, h, WHITE);
+    }
+    glcd.display();
+    delay(200);
+    
+    // then erase it + move it
+    for (uint8_t f=0; f< NUMFLAKES; f++) {
+      //glcd.drawbitmap(icons[f][XPOS], icons[f][YPOS],  logo16_glcd_bmp, w, h, 0);
+      // move it
+      icons[f][YPOS] += icons[f][DELTAY];
+      // if its gone, reinit
+      if (icons[f][YPOS] > 64) {
+  icons[f][XPOS] = random() % 128;
+  icons[f][YPOS] = 0;
+  icons[f][DELTAY] = random() % 5 + 1;
+      }
+    }
+  }
+}
+
+
+void testdrawchar(void) {
+  for (uint8_t i=0; i < 168; i++) {
+    glcd.drawchar((i % 21) * 6, i/21, i);
+  }    
+}
+
+void testdrawcircle(void) {
+  for (uint8_t i=0; i<64; i+=2) {
+    glcd.drawcircle(63, 31, i, BLACK);
+  }
+}
+
+
+void testdrawrect(void) {
+  for (uint8_t i=0; i<64; i+=1) {
+    glcd.drawrect(i, i, 128-i, 64-i, BLACK);
+  }
+}
+
+// testdrawrect 1，control the row and column
+
+void testdrawrect1(void) {
+  for (uint8_t i=0; i<64; i+=1) {
+    glcd.drawrect(i, i, 128-i, 64-i, BLACK);
+  }
+}
+
+
+
+
+
+
+void testfillrect(void) {
+  for (uint8_t i=32; i<64; i++) {
+      // alternate colors for moire effect
+    glcd.fillrect(i, i, 64-i, 64-i, i%4);
+  }
+}
+
+void testdrawline() {
+  for (uint8_t i=0; i<64; i+=4) {
+    glcd.drawline(0,0, i, 63, WHITE);
+  }
+  for (uint8_t i=0; i<64; i+=4) {
+    glcd.drawline(0, 0, 127, i, BLACK);
+  }
+
+  glcd.display();
+  delay(1000);
+
+  for (uint8_t i=0; i<128; i+=4) {
+    glcd.drawline(i, 63, 0, 0, WHITE);
+  }
+  for (uint8_t i=0; i<64; i+=4) {
+    glcd.drawline(127, i, 0, 0, WHITE);
+  }
+}
