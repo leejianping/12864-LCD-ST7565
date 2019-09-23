@@ -14,6 +14,12 @@
  
  pin 5 - LCD chip select (CS)            red  
  
- The pin connection as follows:
+ 
+ 
+ 
+## The pin connection as follows:
 
 ![The connection as follows:](https://github.com/leejianping/12864-LCD-ST7565/blob/master/webwxgetmsgimg%20(2).jpg)
+
+
+LCD buy from the Taobao, https://item.taobao.com/item.htm?spm=a230r.1.14.33.184f20e9QiTANz&id=527032534518&ns=1&abbucket=18#detail
